@@ -1,0 +1,23 @@
+{
+  "name": "e-book-rest-api-project",
+  "version": "1.0.0",
+  "description": "This is a Ebook api project",
+  "main": "index.js",
+  "scripts": {
+    // "dev": "nodemon server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rest",
+    "api",
+    "express"
+  ],
+  "author": "Tanvir Ahmed <tanver018765@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+} 
