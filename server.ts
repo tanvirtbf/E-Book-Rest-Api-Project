@@ -1,14 +1,16 @@
 import app from "./src/app";
 import { config } from "./src/config/config";
-import connectDb from "./src/config/db";
+import connectDB from "./src/config/db";
 
-const startServer = async()=>{
+const startServer = async () => {
+  // Connect database
+  await connectDB();
 
-    await connectDb()
+  const port = config.port || 3000;
 
-    const port = config.port || 8080;
-    
-    app.listen(port , ()=> console.log(`App Run With http://localhost:${port}`))
-}
+  app.listen(port, () => {
+    console.log(`Listening on port: ${port}`);
+  });
+};
 
-startServer()
+startServer();
