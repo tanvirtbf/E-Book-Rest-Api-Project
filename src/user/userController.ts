@@ -23,15 +23,18 @@ const createUser = async(req: Request,res: Response,next: NextFunction)=>{
 
   // password hashed
   const hashedPassword = await bcrypt.hash(password,10)
-  
 
-  // process
+  const newUser = await userModel.create({
+    name,
+    email,
+    password: hashedPassword,
+  })
 
-
+  // Token Generation JWT
 
   // response
 
-  res.json({ message : 'User Created!'})
+  res.json({ id : newUser._id })
 }
 
 export {createUser}
