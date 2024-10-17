@@ -38,7 +38,6 @@ const createUser = async(req: Request, res: Response, next: NextFunction)=>{
   let newUser: User
   
   try {
-
     newUser = await userModel.create({
       name,
       email,
@@ -49,10 +48,9 @@ const createUser = async(req: Request, res: Response, next: NextFunction)=>{
     return next(createHttpError(500, 'Error while creating user'))
   }
   
-
   try {
     // Token Generation JWT
-    const token = sign({ sub: newUser._id }, config.jwtSecret as string, { expiresIn: '1d', algorithm: "HS256"})
+    const token = sign({ sub: newUser._id }, config.jwtSecret as string, {expiresIn: '1d', algorithm: "HS256"})
 
     // response
     res.status(201).json({ accessToken : token })
@@ -60,7 +58,6 @@ const createUser = async(req: Request, res: Response, next: NextFunction)=>{
   } catch (error) {
     return next(createHttpError(500,'Error while signing the jwt token!'))
   }
-
 
 }
 

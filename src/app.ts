@@ -1,14 +1,12 @@
 import express, { NextFunction, Request, Response } from "express";
 import globalErrorHandler from "./middlewares/globalErrorHandler";
-import createHttpError from "http-errors";
 import userRouter from "./user/userRouter";
 
 const app = express();
 
-app.use(express.json())
+app.use(express.json()) // jate json body accepted hoy..
 
 // Routes
-// Http methods: GET, POST, PUT, PATCH, DELETE
 app.get("/", (req, res, next) => {
   res.json({ message: "Welcome to elib apis" });
 });
