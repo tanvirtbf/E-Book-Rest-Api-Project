@@ -11,7 +11,7 @@ const bookRouter = express.Router()
 // amar file ke amar project er local folder e add kore . then amra ekhan theke get kore cloudinary te store kore local folder theke file gula delete kore dey
 
 const upload = multer({
-  dest: path.resolve(__dirname, '../../public/data/uploads'),
+  dest: path.resolve(__dirname, '../../public/data/uploads'), // __dirname holo amader project folder ta return kore
   limits: { fileSize: 3e7} // 30mb 
 })
 
