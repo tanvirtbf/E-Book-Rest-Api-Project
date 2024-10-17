@@ -6,6 +6,7 @@ import bookRouter from "./book/bookRouter";
 const app = express();
 
 app.use(express.json()) // jate json body accepted hoy..
+app.use(express.urlencoded({extended:false}))
 
 // Routes
 app.get("/", (req, res, next) => {
