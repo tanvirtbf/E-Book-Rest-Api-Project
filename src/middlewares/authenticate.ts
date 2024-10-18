@@ -9,7 +9,7 @@ export interface AuthRequest extends Request {
 // etar mane holo Request type jeta express theke ashce seta req er sob method er type define kore amk dise . kintu ami force kore req object er moddhe kono notun variable add korle setar type Request type e thake na . tai Request type ke extends kore extra type add kora holo ekhane
 
 const authenticate = (req: Request, res: Response, next: NextFunction) => {
-    const token = req.header('Authorization')
+    const token = req.header('Authorization') // frontend e user header e Authorization field er moddhe token ta pass korbe
     if(!token){
         return next(createHttpError(401, 'Authorization token is required!'))
     }

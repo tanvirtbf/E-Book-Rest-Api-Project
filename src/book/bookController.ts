@@ -9,7 +9,7 @@ import { AuthRequest } from "../middlewares/authenticate";
 const createBook = async (req: Request, res: Response, next: NextFunction) => {
   
   const {title, genre} = req.body
-  console.log(req.files)
+  // console.log(req.files)
   
   // CoverImage
   const files = req.files as { [fieldname: string]: Express.Multer.File[] }
@@ -40,11 +40,11 @@ const createBook = async (req: Request, res: Response, next: NextFunction) => {
 
     // ekhane bookFileUploadResult er moddhe cloudinary oi pdf book ta store kore kichu information return kore jeta ai variable e hold kora hoise
 
-    console.log('UploadResult : ', uploadResult)
-    console.log('Book File Upload Result : ' , bookFileUploadResult)
+    // console.log('UploadResult : ', uploadResult)
+    // console.log('Book File Upload Result : ' , bookFileUploadResult)
     
     //@ts-ignore
-    console.log('userId', req.userId)
+    // console.log('userId', req.userId)
 
     const _req = req as AuthRequest
 
@@ -68,4 +68,22 @@ const createBook = async (req: Request, res: Response, next: NextFunction) => {
 
 }
 
-export {createBook}
+
+const updateBook = async (req: Request, res: Response, next: NextFunction) => {
+
+  const { title, genre } = req.body
+  const bookId = req.params.bookId
+
+  const book = await bookModel.findOne({ _id: bookId })
+  if(!book) {
+    return next(createHttpError(401, 'Book Not Found!'))
+  }
+
+  // Now Check for : je update kortese seii ki sei book er author ? 
+  const _req = req as AuthRequest
+  if(book.author.toString() !== _req.userId) { 
+    return next(createHttpError(403, 'You cannot update others books'))
+  }
+}
+
+export { createBook, updateBook }
