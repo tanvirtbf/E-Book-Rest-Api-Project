@@ -73,17 +73,20 @@ const updateBook = async (req: Request, res: Response, next: NextFunction) => {
 
   const { title, genre } = req.body
   const bookId = req.params.bookId
-
+  console.log(bookId)
   const book = await bookModel.findOne({ _id: bookId })
   if(!book) {
     return next(createHttpError(401, 'Book Not Found!'))
   }
+  console.log(book)
 
   // Now Check for : je update kortese seii ki sei book er author ? 
   const _req = req as AuthRequest
   if(book.author.toString() !== _req.userId) { 
     return next(createHttpError(403, 'You cannot update others books'))
   }
+
+  res.json({ message : 'Under the constructions!'})
 }
 
 export { createBook, updateBook }
