@@ -19,6 +19,8 @@ const createBook = async (req: Request, res: Response, next: NextFunction) => {
     format: coverImageMimeType
   })
 
+  // File
+
   console.log('UploadResult', uploadResult)
   res.json({})
 }
