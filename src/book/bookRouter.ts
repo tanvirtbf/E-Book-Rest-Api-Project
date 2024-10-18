@@ -12,13 +12,13 @@ const bookRouter = express.Router()
 
 const upload = multer({
   dest: path.resolve(__dirname, '../../public/data/uploads'), // __dirname holo amader project folder ta return kore
-  limits: { fileSize: 3e7} // 30mb 
+  limits: { fileSize: 3e7 } // 30mb 
 })
 
 bookRouter.post('/', upload.fields([
   { name : 'coverImage', maxCount: 1},
   { name : 'file', maxCount: 1 }
 ]) , createBook)
-
+// upore name : 'coverImage' and 'file' holo bookModel theke neya hubuhu nam gula . tar mane ami form datay coverImage and file e ja pass korbo only sei 2 ta multer process kore cloudinary te dibe 
 
 export default bookRouter
