@@ -7,7 +7,6 @@ import bookModel from "./bookModel";
 import { AuthRequest } from "../middlewares/authenticate";
 
 const createBook = async (req: Request, res: Response, next: NextFunction) => {
-  
   const {title, genre} = req.body
   // console.log(req.files)
   
