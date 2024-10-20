@@ -133,8 +133,8 @@ const updateBook = async (req: Request, res: Response, next: NextFunction) => {
       _id: bookId,
     },
     {
-      title: title,
       genre: genre,
+      title: title,
       coverImage: completeCoverImage ? completeCoverImage : book.coverImage,
       file: completeFileName ? completeFileName : book.file,
     },
@@ -143,4 +143,16 @@ const updateBook = async (req: Request, res: Response, next: NextFunction) => {
 
   res.json(updatedBook);
 };
-export { createBook, updateBook }
+
+const listBooks = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const book = await bookModel.find()
+    res.json(book)
+  } catch (error) {
+    next(createHttpError(500, 'Error while Getting all book list!'))
+  }
+}
+
+
+
+export { createBook, updateBook, listBooks }
