@@ -120,7 +120,7 @@ const updateBook = async (req: Request, res: Response, next: NextFunction) => {
     const uploadResultPdf = await cloudinary.uploader.upload(bookFilePath, {
       resource_type: "raw",
       filename_override: completeFileName,
-      folder: "book-covers",
+      folder: "book-pdfs",
       format: "pdf",
     });
 
