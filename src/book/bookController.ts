@@ -180,6 +180,15 @@ const deleteBook = async (req: Request, res: Response, next: NextFunction) => {
       return next(createHttpError(403, 'You can not delete others book'))
     }
 
+    // Delete from cloudinary
+    const coverFileSplits = book.coverImage.split('/')
+    const coverImagePublicId = coverFileSplits.at(-2) + '/' + (coverFileSplits.at(-1)?.split('.').at(-2))
+    console.log('coverImagePublicId : ',coverImagePublicId) 
+
+    const bookFileSplits = book.file.split('/')
+    const bookFilePublicId = bookFileSplits.at(-2) + '/' + bookFileSplits.at(-1)
+    console.log(bookFilePublicId)
+
     return res.json(book)
   } catch (error) {
     return next(createHttpError(500, 'Error while delete a book!'))
