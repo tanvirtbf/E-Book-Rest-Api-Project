@@ -167,9 +167,9 @@ const getSingleBook = async (req: Request, res: Response, next: NextFunction) =>
 }
 
 const deleteBook = async (req: Request, res: Response, next: NextFunction) => {
-  const bookid = req.params.bookId
+  const bookId = req.params.bookId
   try {
-    const book = await bookModel.findOne({ _id : bookid })
+    const book = await bookModel.findOne({ _id : bookId })
     if(!book) {
       return next(createHttpError(404, 'Book not found!'))
     } 
@@ -183,13 +183,21 @@ const deleteBook = async (req: Request, res: Response, next: NextFunction) => {
     // Delete from cloudinary
     const coverFileSplits = book.coverImage.split('/')
     const coverImagePublicId = coverFileSplits.at(-2) + '/' + (coverFileSplits.at(-1)?.split('.').at(-2))
-    console.log('coverImagePublicId : ',coverImagePublicId) 
+    // console.log('coverImagePublicId : ',coverImagePublicId) 
 
     const bookFileSplits = book.file.split('/')
     const bookFilePublicId = bookFileSplits.at(-2) + '/' + bookFileSplits.at(-1)
-    console.log(bookFilePublicId)
+    // console.log(bookFilePublicId)
 
-    return res.json(book)
+    await cloudinary.uploader.destroy(coverImagePublicId)
+    await cloudinary.uploader.destroy(bookFilePublicId , {
+      resource_type: 'raw', // eta only image and video chara baki sob khetre ai extra parameter dite hoy delete korar somoy..
+    })
+
+    // Delete from Database 
+    await bookModel.deleteOne({ _id : bookId })
+
+    return res.sendStatus(204)
   } catch (error) {
     return next(createHttpError(500, 'Error while delete a book!'))
   }
