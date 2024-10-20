@@ -166,6 +166,25 @@ const getSingleBook = async (req: Request, res: Response, next: NextFunction) =>
   }
 }
 
+const deleteBook = async (req: Request, res: Response, next: NextFunction) => {
+  const bookid = req.params.bookId
+  try {
+    const book = await bookModel.findOne({ _id : bookid })
+    if(!book) {
+      return next(createHttpError(404, 'Book not found!'))
+    } 
+
+    // Check access : ai je user se ki delete korte parbe kina
+    const _req = req as AuthRequest
+    if(book.author.toString() !== _req.userId) {
+      return next(createHttpError(403, 'You can not delete others book'))
+    }
+
+    return res.json(book)
+  } catch (error) {
+    return next(createHttpError(500, 'Error while delete a book!'))
+  }
+}
 
 
-export { createBook, updateBook, listBooks, getSingleBook }
+export { createBook, updateBook, listBooks, getSingleBook, deleteBook }
