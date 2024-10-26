@@ -21,4 +21,3 @@ const userSchema = new mongoose.Schema<User>({
 // users
 export default mongoose.model<User>('User', userSchema)
 
-

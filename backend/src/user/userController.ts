@@ -29,7 +29,7 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
     return next(createHttpError(500, "Error while getting user"));
   }
 
-  /// password -> hash
+  // password -> hash
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -56,6 +56,9 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
     return next(createHttpError(500, "Error while signing the jwt token"));
   }
 };
+
+
+
 
 const loginUser = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;

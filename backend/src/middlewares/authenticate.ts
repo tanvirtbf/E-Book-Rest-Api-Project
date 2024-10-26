@@ -15,13 +15,14 @@ const authenticate = (req: Request, res: Response, next: NextFunction) => {
     }
     
     try {
+        console.log(token)
         const parsedToken = token.split(' ')[1]
         // Token Decoded or verified..
         const decoded = verify(parsedToken, config.jwtSecret as string)
         // console.log('decoded: ', decoded)
         const _req = req as AuthRequest
         _req.userId = decoded.sub as string
-     
+        
         next()
         
     } catch (error) {
