@@ -8,6 +8,8 @@ const bookSchema = new mongoose.Schema<Book>({
   },
   author: {
     type : mongoose.Schema.ObjectId,
+    // add ref
+    ref: "User", // er mane holo ai book er moddhe jei author column ase seta connected ase User table er sathe . evabeii mongoose e reference add kora hoy 
     required: true,
   },
   coverImage: {
