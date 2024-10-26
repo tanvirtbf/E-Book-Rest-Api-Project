@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BookList = () => {
+const BookList = ({ books }: {books: Book[]}) => {
   return (
     <div>
       BookList
