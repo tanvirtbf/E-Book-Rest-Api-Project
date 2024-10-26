@@ -7,7 +7,7 @@ import bookModel from "./bookModel";
 import { AuthRequest } from "../middlewares/authenticate";
 
 const createBook = async (req: Request, res: Response, next: NextFunction) => {
-  const {title, genre} = req.body
+  const {title, genre, description} = req.body
   console.log(req.files)
   
   // CoverImage
@@ -49,6 +49,7 @@ const createBook = async (req: Request, res: Response, next: NextFunction) => {
 
     const newBook = await bookModel.create({
       title,
+      description,
       genre,
       author: _req.userId,
       coverImage: uploadResult.secure_url,
