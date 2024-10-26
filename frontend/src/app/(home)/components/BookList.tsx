@@ -1,5 +1,6 @@
 import { Book } from '@/types'
 import React from 'react'
+import BookCard from './BookCard'
 
 const BookList = ({ books }: {books: Book[]}) => {
   console.log(books)
@@ -7,7 +8,7 @@ const BookList = ({ books }: {books: Book[]}) => {
     <div>
       {
         books.map((book)=> (
-          <h1 key={book._id}>{book.title}</h1>
+          <BookCard key={book._id} book={book} />
         ))
       }
     </div>
