@@ -4,5 +4,5 @@ export type Book = {
   description: string,
   coverImage: string,
   file: string,
-  
+  author: 
 }
