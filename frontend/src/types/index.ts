@@ -9,4 +9,5 @@ export type Book = {
 
 export type Author = {
   name : string,
+  email: string,
 }

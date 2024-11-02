@@ -4,7 +4,9 @@ import BookList from "./components/BookList";
 
 export default async function Home() {
 
-  const response = await fetch(`${process.env.BACKEND_URL}/books`)
+  const response = await fetch(`${process.env.BACKEND_URL}/books`,{
+    cache: 'no-cache'
+  })
   if(!response.ok) {
     throw new Error('An error occurred while fetching the books')
   }
