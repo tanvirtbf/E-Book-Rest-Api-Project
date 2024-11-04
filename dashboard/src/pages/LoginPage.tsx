@@ -19,8 +19,8 @@ const LoginPage = () => {
     const handleLoginSubmit = () => {
         const email = emailRef.current?.value
         const password = passwordRef.current?.value
-
         console.log(email, password)
+
         // make server log
     }
 
@@ -49,7 +49,7 @@ const LoginPage = () => {
 
                         <div className="mt-4 text-center text-sm">
                             Don't have an account?{' '}
-                            <Link to={'/register'} className="underline">
+                            <Link to={'/auth/register'} className="underline">
                                 Sign up
                             </Link>
                         </div>
