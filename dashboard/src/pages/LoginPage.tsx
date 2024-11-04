@@ -13,6 +13,8 @@ import { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '@/http/api';
 import { useMutation } from '@tanstack/react-query';
+import { RefreshCcw } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const LoginPage = () => {
 
@@ -51,6 +53,7 @@ const LoginPage = () => {
                     <CardTitle className="text-2xl">Login</CardTitle>
                     <CardDescription>
                         Enter your email below to login to your account.
+                        {mutation.isPending && <div>Loading...</div>}
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-4">
@@ -65,7 +68,10 @@ const LoginPage = () => {
                 </CardContent>
                 <CardFooter>
                     <div className="w-full">
-                        <Button className="w-full" onClick={handleLoginSubmit}>Sign in</Button>
+                        <Button className="w-full flex items-center gap-2" onClick={handleLoginSubmit} disabled={mutation.isPending}>
+                            {mutation.isPending && <RefreshCcw className='animate-spin' />}
+                            <span>Sign in</span>
+                        </Button>
 
                         <div className="mt-4 text-center text-sm">
                             Don't have an account?{' '}
