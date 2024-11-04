@@ -12,6 +12,7 @@ import { Label } from '@/components/ui/label';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query'
+import { login } from '@/http/api';
 
 const LoginPage = () => {
     const emailRef = useRef<HTMLInputElement>(null)
@@ -21,8 +22,7 @@ const LoginPage = () => {
     const mutation = useMutation({
         mutationFn: login,
         onSuccess: () => {
-        // Invalidate and refetch
-        queryClient.invalidateQueries({ queryKey: ['todos'] })
+            console.log('Success!')
         },
     })
 
@@ -31,7 +31,12 @@ const LoginPage = () => {
         const password = passwordRef.current?.value
         console.log(email, password)
 
+        if(!email || !password){
+            return alert('Please Enter Email or Password!')
+        }
+
         // make server log
+        mutation.mutate({email,password})
     }
 
     return (
