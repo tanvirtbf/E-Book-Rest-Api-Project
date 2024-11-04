@@ -11,8 +11,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query'
 import { login } from '@/http/api';
+import { useMutation } from '@tanstack/react-query';
 
 const LoginPage = () => {
     const emailRef = useRef<HTMLInputElement>(null)
@@ -29,7 +29,6 @@ const LoginPage = () => {
     const handleLoginSubmit = () => {
         const email = emailRef.current?.value
         const password = passwordRef.current?.value
-        console.log(email, password)
 
         if(!email || !password){
             return alert('Please Enter Email or Password!')
