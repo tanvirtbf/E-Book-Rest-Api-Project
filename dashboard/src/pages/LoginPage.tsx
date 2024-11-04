@@ -19,6 +19,9 @@ const LoginPage = () => {
     const handleLoginSubmit = () => {
         const email = emailRef.current?.value
         const password = passwordRef.current?.value
+
+        console.log(email, password)
+        // make server log
     }
 
     return (
@@ -42,7 +45,7 @@ const LoginPage = () => {
                 </CardContent>
                 <CardFooter>
                     <div className="w-full">
-                        <Button className="w-full">Sign in</Button>
+                        <Button className="w-full" onClick={handleLoginSubmit}>Sign in</Button>
 
                         <div className="mt-4 text-center text-sm">
                             Don't have an account?{' '}
