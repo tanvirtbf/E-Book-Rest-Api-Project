@@ -11,10 +11,20 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query'
 
 const LoginPage = () => {
     const emailRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)
+
+    // Mutations
+    const mutation = useMutation({
+        mutationFn: login,
+        onSuccess: () => {
+        // Invalidate and refetch
+        queryClient.invalidateQueries({ queryKey: ['todos'] })
+        },
+    })
 
     const handleLoginSubmit = () => {
         const email = emailRef.current?.value
