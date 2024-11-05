@@ -14,10 +14,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { login } from '@/http/api';
 import { useMutation } from '@tanstack/react-query';
 import { RefreshCcw } from 'lucide-react';
+import useTokenStore from '@/store';
 
 const LoginPage = () => {
 
     const navigate = useNavigate()
+    const setToken = useTokenStore((state)=> state.setToken)
 
     const emailRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)
@@ -25,8 +27,10 @@ const LoginPage = () => {
     // Mutations
     const mutation = useMutation({
         mutationFn: login,
-        onSuccess: () => {
-            console.log('Success!')
+        onSuccess: (response) => {
+            console.log('Success!', response)
+
+            setToken(response.data.accessToken)
 
             // Redirect After login successfully..
             navigate('/dashboard/home')

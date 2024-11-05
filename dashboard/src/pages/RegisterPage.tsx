@@ -36,7 +36,7 @@ const RegisterPage = () => {
             return alert('Please Enter Email or Password!')
         }
 
-        // make server log
+        // make server call
         mutation.mutate({name,email,password})
     }
 
