@@ -29,8 +29,14 @@ import { Link, Navigate, Outlet } from 'react-router-dom';
 const DashboardLayout = () => {
 
     const token = useTokenStore(state => state.token)
+    const setToken = useTokenStore(state => state.setToken)
+
     if(!token){
         return <Navigate to={'/auth/login'} replace />
+    }
+
+    const logout = () => {
+        setToken("")
     }
 
     return (
@@ -176,7 +182,7 @@ const DashboardLayout = () => {
                             <DropdownMenuItem>Settings</DropdownMenuItem>
                             <DropdownMenuItem>Support</DropdownMenuItem>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem>Logout</DropdownMenuItem>
+                            <DropdownMenuItem onClick={logout}>Logout</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </header>
