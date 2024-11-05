@@ -7,10 +7,12 @@ import { useMutation } from '@tanstack/react-query';
 import { RefreshCcw } from 'lucide-react';
 import { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import useTokenStore from '@/store';
 
 const RegisterPage = () => {
 
     const navigate = useNavigate()
+    const setToken = useTokenStore((state)=> state.setToken)
 
     const nameRef = useRef<HTMLInputElement>(null)
     const emailRef = useRef<HTMLInputElement>(null)
@@ -19,8 +21,10 @@ const RegisterPage = () => {
     // Mutations
     const mutation = useMutation({
         mutationFn: register,
-        onSuccess: () => {
+        onSuccess: (response) => {
             console.log('Success!')
+
+            setToken(response.data.accessToken)
 
             // Redirect After login successfully..
             navigate('/dashboard/home')
