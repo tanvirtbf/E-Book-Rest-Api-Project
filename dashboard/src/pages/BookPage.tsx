@@ -98,9 +98,9 @@ const BooksPage = () => {
                                         <TableCell>
                                             <Badge variant="outline">{book.genre}</Badge>
                                         </TableCell>
-                                        {/* <TableCell className="hidden md:table-cell">
+                                        <TableCell className="hidden md:table-cell">
                                             {book.author.name}
-                                        </TableCell> */}
+                                        </TableCell> 
                                         <TableCell className="hidden md:table-cell">
                                             {book.createdAt}
                                         </TableCell>
